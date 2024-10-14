@@ -12,7 +12,7 @@ public class teleop extends LinearOpMode {
         R.init(telemetry,this,hardwareMap);
         R.gamepad_init(gamepad1,gamepad2);
         waitForStart();
-        //wheelbase init encoder???
+        //wheelbase init encoder????
         while(!isStopRequested()) {
 
             R.wb.tele();
