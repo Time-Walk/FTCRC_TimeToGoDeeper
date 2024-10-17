@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telek221")
+
 public class teleop extends LinearOpMode {
 
     @Override
@@ -16,6 +18,9 @@ public class teleop extends LinearOpMode {
         while(!isStopRequested()) {
 
             R.wb.tele();
+            R.gb.grab();
+            R.ac.tele();
+            R.lift.tele();
 
 
             telemetry.addData("LF", R.wb.LF.getPower());
