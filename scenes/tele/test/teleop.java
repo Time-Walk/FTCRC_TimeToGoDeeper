@@ -18,7 +18,7 @@ public class teleop extends LinearOpMode {
         while(!isStopRequested()) {
 
             R.wb.tele();
-            R.gb.grab();
+            R.gb.tele();
             R.ac.tele();
             R.lift.tele();
 

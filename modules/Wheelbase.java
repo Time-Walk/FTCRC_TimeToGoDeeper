@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 
-public class wheelbase extends Module {
+public class Wheelbase extends Module {
     public DcMotor LF, RF, LB, RB;
     public void init() {
         LF = hwmp.get(DcMotor.class, "LF");

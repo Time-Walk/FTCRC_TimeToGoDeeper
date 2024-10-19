@@ -5,17 +5,16 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.func.classes.DriverHelper;
 import org.firstinspires.ftc.teamcode.modules.Ascent;
 import org.firstinspires.ftc.teamcode.modules.Grab;
 import org.firstinspires.ftc.teamcode.modules.Lift;
-import org.firstinspires.ftc.teamcode.modules.wheelbase;
+import org.firstinspires.ftc.teamcode.modules.Wheelbase;
 
 public class RobotConstruct {
     public Telemetry telemetry;
     public LinearOpMode L;
     public HardwareMap hwpm;
-    public wheelbase wb;
+    public Wheelbase wb;
     public Grab gb;
     public Ascent ac;
     public Lift lift;
@@ -26,7 +25,7 @@ public class RobotConstruct {
         this.L = L;
         this.hwpm = hwmp;
 
-        wb = new wheelbase();
+        wb = new Wheelbase();
         wb.initFields(telemetry,L,hwmp);
         wb.init();
         //init encoder???

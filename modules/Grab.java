@@ -6,21 +6,21 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 @Config
 public class Grab extends Module {
-    public CRServo ar, al;
+    public CRServo gr, gl;
     public static double power = 1.0;
     @Override
     public void init() {
-        ar = hwmp.get(CRServo.class, "ar");
-        al = hwmp.get(CRServo.class, "al");
+        //gr = hwmp.get(CRServo.class, "gr");
+        gl = hwmp.get(CRServo.class, "gl");
     }
-    public void grab() {
+    public void tele() {
         if (gamepad2.y) {
-            ar.setPower(power);
-            al.setPower(-power);
+            //gr.setPower(power);
+            gl.setPower(-power);
 
         } else if (gamepad2.x) {
-            ar.setPower(-power);
-            al.setPower(power);
+            //gr.setPower(-power);
+            gl.setPower(power);
         }
 
     }
