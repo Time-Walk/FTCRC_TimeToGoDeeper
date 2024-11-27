@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telek221")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telekop")
 
 public class teleop extends LinearOpMode {
 
@@ -27,6 +27,8 @@ public class teleop extends LinearOpMode {
             telemetry.addData("LB", R.wb.LB.getPower());
             telemetry.addData("RF", R.wb.RF.getPower());
             telemetry.addData("RB", R.wb.RB.getPower());
+            telemetry.addData("gl", R.gb.gl.getPower());
+            telemetry.addData("gr", R.gb.gr.getPower());
             telemetry.update();
         }
     }

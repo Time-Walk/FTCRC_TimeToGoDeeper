@@ -18,6 +18,24 @@ public class Wheelbase extends Module {
         RB.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
+    public void initEncoderTele(){
+      //  LB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        LF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        RF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      //  RB.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+    public void initEncoderAuto() {
+        LF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    //    LB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    //    LB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        RF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    //    RB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    //    RB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+    }
+
     public void setMtPower(double lf, double lb, double rf, double rb) {
         LF.setPower(lf);
         LB.setPower(lb);

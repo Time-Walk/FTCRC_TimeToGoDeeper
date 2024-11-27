@@ -7,8 +7,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.modules.Ascent;
 import org.firstinspires.ftc.teamcode.modules.Grab;
+import org.firstinspires.ftc.teamcode.modules.IMU;
+import org.firstinspires.ftc.teamcode.modules.IMUv2;
 import org.firstinspires.ftc.teamcode.modules.Lift;
 import org.firstinspires.ftc.teamcode.modules.Wheelbase;
+import org.firstinspires.ftc.teamcode.modules.camera.CameraOut;
 
 public class RobotConstruct {
     public Telemetry telemetry;
@@ -18,6 +21,9 @@ public class RobotConstruct {
     public Grab gb;
     public Ascent ac;
     public Lift lift;
+    public IMU imu;
+    public IMUv2 imuv2;
+    public CameraOut cam;
 
 
     public void init(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp) { // init fields here
@@ -41,6 +47,14 @@ public class RobotConstruct {
         lift = new Lift();
         lift.initFields(telemetry,L,hwmp);
         lift.init();
+
+        imuv2 = new IMUv2();
+        imuv2.initFields(telemetry,L,hwmp);
+        imuv2.init();
+
+        cam = new CameraOut();
+        cam.initFields(telemetry,L,hwmp);
+        cam.init();
 
 
 
