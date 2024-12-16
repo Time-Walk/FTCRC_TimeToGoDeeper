@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.scenes.tele.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.modules.Lift;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telekop")
@@ -21,14 +22,19 @@ public class teleop extends LinearOpMode {
             R.gb.tele();
             R.ac.tele();
             R.lift.tele();
+            if (gamepad2.a) {
+                R.lift.regulate();
+            }
 
 
             telemetry.addData("LF", R.wb.LF.getPower());
             telemetry.addData("LB", R.wb.LB.getPower());
             telemetry.addData("RF", R.wb.RF.getPower());
             telemetry.addData("RB", R.wb.RB.getPower());
-            telemetry.addData("gl", R.gb.gl.getPower());
-            telemetry.addData("gr", R.gb.gr.getPower());
+            telemetry.addData("tiktok", R.lift.L.getCurrentPosition());
+            telemetry.addData("powah", Lift.ap);
+           // telemetry.addData("gl", R.gb.gl.getPower());
+           // telemetry.addData("gr", R.gb.gr.getPower());
             telemetry.update();
         }
     }

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.scenes.auto.test;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.modules.camera.Pipeline;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 import org.firstinspires.ftc.teamcode.modules.camera.AprilTagDetectionPipeline;
 
@@ -12,8 +13,9 @@ public class CameraTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         RobotConstruct R = new RobotConstruct();
         R.init(telemetry, this, hardwareMap);
-        AprilTagDetectionPipeline pipe = new AprilTagDetectionPipeline();
+   //     AprilTagDetectionPipeline pipe = new AprilTagDetectionPipeline();
 
+        Pipeline pipe = new Pipeline();
         R.cam.openWithPipeline(pipe, true);
 
         while (!isStarted() && !isStopRequested()) {
