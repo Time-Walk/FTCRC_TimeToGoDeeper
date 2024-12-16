@@ -16,8 +16,9 @@ public class Lift extends Module {
     L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void tele() {
-        L.setPower((gamepad2.left_stick_y*gamepad2.left_stick_y)*Math.signum(gamepad2.left_stick_y));
-        L.setPower((gamepad2.right_stick_y*gamepad2.right_stick_y)*Math.signum(gamepad2.right_stick_y)*0.5);
+        //L.setPower((gamepad2.left_stick_y*gamepad2.left_stick_y)*Math.signum(gamepad2.left_stick_y));
+        //L.setPower((gamepad2.right_stick_y*gamepad2.right_stick_y)*Math.signum(gamepad2.right_stick_y)*0.5);
+        L.setPower(gamepad2.left_stick_y);
     }
     public void regulate(){
         while (gamepad2.left_stick_y!=0) {

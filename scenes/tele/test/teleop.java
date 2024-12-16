@@ -22,9 +22,9 @@ public class teleop extends LinearOpMode {
             R.gb.tele();
             R.ac.tele();
             R.lift.tele();
-            if (gamepad2.a) {
-                R.lift.regulate();
-            }
+            //if (gamepad2.a) {
+            //    R.lift.regulate();
+            //}
 
 
             telemetry.addData("LF", R.wb.LF.getPower());

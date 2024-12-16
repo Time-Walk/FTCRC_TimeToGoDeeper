@@ -10,20 +10,20 @@ public class Grab extends Module {
     public static double power = 1.0;
     @Override
     public void init() {
-    //    gr = hwmp.get(CRServo.class, "gr");
-    //    gl = hwmp.get(CRServo.class, "gl");
+        gr = hwmp.get(CRServo.class, "gr");
+        gl = hwmp.get(CRServo.class, "gl");
     }
     public void tele() {
-        if (gamepad2.y) {
-    //        gl.setPower(-power);
-    //        gr.setPower(power);
+        if (gamepad2.y) { 
+            gl.setPower(-power);
+            gr.setPower(power);
 
         } else if (gamepad2.x) {
-    //        gl.setPower(power);
-    //        gr.setPower(-power);
+            gl.setPower(power);
+            gr.setPower(-power);
         } else {
-    //        gl.setPower(0);
-    //        gr.setPower(0);
+            gl.setPower(0);
+            gr.setPower(0);
         }
 
     }
