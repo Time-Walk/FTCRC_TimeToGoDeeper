@@ -42,7 +42,7 @@ public class CameraOut extends Module {
             }
         });
     }
-    public Mat getrtvec(String n) {
+    /*public Mat getrtvec(String n) {
         AprilTagDetectionPipeline April = new AprilTagDetectionPipeline();
         April.April(0.1016,0,0,0,0,telemetry);
         Mat a = new Mat();
@@ -52,6 +52,6 @@ public class CameraOut extends Module {
             a = AprilTagDetectionPipeline.rvec;
         }
         return a;
-        }
+        }*/
 
     }

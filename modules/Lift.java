@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 @Config
 public class Lift extends Module {
     public DcMotor L;
-    public static double ticke = -100;
+    public static double ticke = 1000;
     public static double kl = 0.001;
     public static double ap = 0;
     @Override
@@ -21,14 +21,24 @@ public class Lift extends Module {
         L.setPower(gamepad2.left_stick_y);
     }
     public void regulate(){
-        while (gamepad2.left_stick_y!=0) {
-            ap = Math.abs(ticke) - Math.abs(L.getCurrentPosition()) * kl;
-            if (Math.abs(ap)>1) {
-                L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            }
-            L.setPower(gamepad2.left_stick_y + ap);
+        if (ticke > L.getCurrentPosition()) {
+            ap = L.getCurrentPosition()/ticke;
+            ap = ap*kl;
+        } else if (L.getCurrentPosition()>ticke) {
+            ap = L.getCurrentPosition()/ticke;
+            ap = ap*kl;
         }
+        telemetry.addData("ap", ap);
+        telemetry.addData("ticke",Math.abs(ticke));
+        telemetry.addData("pos",Math.abs(L.getCurrentPosition()));
+        if (gamepad2.dpad_down) {
+            L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            telemetry.addData("reset encoders", "!");
+            telemetry.update();
+        }
+        L.setPower((-gamepad2.left_stick_y+(ap*0.6)*0.65));
+        telemetry.update();
 
     }
 }

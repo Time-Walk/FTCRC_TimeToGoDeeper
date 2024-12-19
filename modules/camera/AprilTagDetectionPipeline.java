@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.modules.camera;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.MotionDetection;
 import org.opencv.calib3d.Calib3d;
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
@@ -26,8 +28,8 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
     private Map<Integer, Double>tagDistances = new HashMap<>();
     private Set<Integer> currentTagIDs = new HashSet<>();
 
-    public static Mat rvec = null;
-    public static Mat tvec = null;
+    public static Mat rvec = new Mat();
+    public static Mat tvec = new Mat();
 
     public boolean tagfaund = false;
     private long nativeApriltagPtr;
@@ -41,7 +43,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
         return detections;
     }
 
-    Mat cameraMatrix;
+    public Mat cameraMatrix;
 
     Scalar blue = new Scalar(7,197,235,255);
     Scalar red = new Scalar(255,0,0,255);
@@ -64,7 +66,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
 
     private Telemetry telemetry;  // Telemetry nesnesini tanımlayın.
 
-    public void April(double tagsize, double fx, double fy, double cx, double cy, Telemetry telemetry)
+    public AprilTagDetectionPipeline(double tagsize, double fx, double fy, double cx, double cy, Telemetry telemetry)
     {
         this.tagsize = tagsize;
         this.tagsizeX = tagsize;
@@ -76,7 +78,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
 
         this.telemetry = telemetry;  // Telemetry nesnesini kurucuya ekleyin.
 
-        constructMatrix();
+        //constructMatrix();
 
         // Allocate a native context object. See the corresponding deletion in the finalizer
         nativeApriltagPtr = AprilTagDetectorJNI.createApriltagDetector(AprilTagDetectorJNI.TagFamily.TAG_36h11.string, 3, 3);
@@ -97,10 +99,18 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
             System.out.println("AprilTagDetectionPipeline.finalize(): nativeApriltagPtr was NULL");
         }
     }
+    public Mat ArrayToMat(double[] abc) {
+        Mat mat = new Mat();
+        mat.put(0,0,abc);
+        return mat;
+    }
+
 
     @Override
     public Mat processFrame(Mat input)
     {
+        //telemetry.addData("process", "tipa");
+        //telemetry.update();
         // Convert to greyscale
         Imgproc.cvtColor(input, grey, Imgproc.COLOR_RGBA2GRAY);
 
@@ -138,8 +148,16 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
             Pose pose = poseFromTrapezoid(detection.corners, cameraMatrix, tagsizeX, tagsizeY);
 
             // Calculate the distance to the tag
+            Mat Rt = new Mat();
+            Calib3d.Rodrigues(rvec, Rt);
+            Core.transpose(ArrayToMat(Rt.get(0,0)), Rt); // this shit it error it wont work because im handicapped
+            //double sy = Math.sqrt(Rt.get(0,0) * Rt.get(0,0) + Rt.get(1,0) * Rt.get(1,0));
+            //srvec = "rvec: " + str(rvec[0][0])[:5] + " " + str(rvec[1][0])[:5] + " " + str(rvec[2][0])[:5]
+            //String srvec = "rvec"+toString(pose.rvec.get(0,0));
+
+
             double distance = Math.sqrt(
-                    Math.pow(pose.tvec.get(0, 0)[0], 2) +
+                            Math.pow(pose.tvec.get(0, 0)[0], 2) +
                             Math.pow(pose.tvec.get(1, 0)[0], 2) +
                             Math.pow(pose.tvec.get(2, 0)[0], 2)
             );
@@ -152,6 +170,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
             telemetry.addData("Detected tag ID: " + detection.id, "Distance: " +
                     distance * 100);
             telemetry.addData("Detections :", detection.pose.y);
+            telemetry.update();
         }
 
         // Remove tags that are no longer detected
@@ -167,12 +186,12 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
         // Update telemetry
         telemetry.update();
 
-        for (AprilTagDetection detection : detections)
+        /*for (AprilTagDetection detection : detections)
         {
             Pose pose = poseFromTrapezoid(detection.corners, cameraMatrix, tagsizeX, tagsizeY);
             drawAxisMarker(input, tagsizeY / 2.0, 6, pose.rvec, pose.tvec, cameraMatrix);
             draw3dCubeMarker(input, tagsizeX, tagsizeX, tagsizeY, 5, pose.rvec, pose.tvec, cameraMatrix);
-        }
+        }*/
 
         return input;
     }
@@ -201,7 +220,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
         }
     }
 
-    void constructMatrix()
+    public void constructMatrix()
     {
         //     Construct the camera matrix.
         //
@@ -317,6 +336,15 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
                 new Point3(tagsizeX/2.0, -tagsizeY/2.0, 0),
                 new Point3(-tagsizeX/2.0, -tagsizeY/2.0, 0)
         );
+
+        telemetry.addData("obj points", objPoints.nativeObj);
+        telemetry.addData("points", points.nativeObj);
+        telemetry.addData("cameraMatrix", cameraMatrix.nativeObj);
+        telemetry.addData("matofdouble ",new MatOfDouble().nativeObj);
+        telemetry.addData("rvec", rvec.nativeObj);
+        telemetry.addData("tvec", tvec.nativeObj);
+        telemetry.update();
+
 
 
         Calib3d.solvePnP(objPoints, points, cameraMatrix, new MatOfDouble(), rvec, tvec, false);
