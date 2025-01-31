@@ -18,7 +18,11 @@ public class Lift extends Module {
     public void tele() {
         //L.setPower((gamepad2.left_stick_y*gamepad2.left_stick_y)*Math.signum(gamepad2.left_stick_y));
         //L.setPower((gamepad2.right_stick_y*gamepad2.right_stick_y)*Math.signum(gamepad2.right_stick_y)*0.5);
-        L.setPower(gamepad2.left_stick_y);
+        //L.setPower(gamepad1.right_trigger - (gamepad1.left_trigger*0.24556));
+        if (gamepad2.left_stick_y>0) {L.setPower(gamepad2.left_stick_y);}
+        if (gamepad2.left_stick_y<0) {L.setPower(gamepad2.left_stick_y*0.2);
+        }
+
     }
     public void regulate(){
         if (ticke > L.getCurrentPosition()) {
@@ -30,10 +34,10 @@ public class Lift extends Module {
         }
         telemetry.addData("ap", ap);
         telemetry.addData("ticke",Math.abs(ticke));
-        telemetry.addData("pos",Math.abs(L.getCurrentPosition()));
-        if (gamepad2.dpad_down) {
-            L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //telemetry.addData("pos",Math.abs(L.getCurrentPosition()));
+        if (gamepad1.left_bumper) {
+        //    L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //    L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             telemetry.addData("reset encoders", "!");
             telemetry.update();
         }

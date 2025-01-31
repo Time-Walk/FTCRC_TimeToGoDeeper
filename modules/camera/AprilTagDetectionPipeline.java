@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.modules.camera;
 
+import static org.opencv.core.CvType.CV_64F;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.MotionDetection;
 import org.opencv.calib3d.Calib3d;
@@ -123,6 +125,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
             }
         }
 
+
         // Run AprilTag
         detections = AprilTagDetectorJNI.runAprilTagDetectorSimple(nativeApriltagPtr, grey, tagsize, fx, fy, cx, cy);
 
@@ -148,13 +151,24 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
             Pose pose = poseFromTrapezoid(detection.corners, cameraMatrix, tagsizeX, tagsizeY);
 
             // Calculate the distance to the tag
-            Mat Rt = new Mat();
-            Calib3d.Rodrigues(rvec, Rt);
-            Core.transpose(ArrayToMat(Rt.get(0,0)), Rt); // this shit it error it wont work because im handicapped
-            //double sy = Math.sqrt(Rt.get(0,0) * Rt.get(0,0) + Rt.get(1,0) * Rt.get(1,0));
-            //srvec = "rvec: " + str(rvec[0][0])[:5] + " " + str(rvec[1][0])[:5] + " " + str(rvec[2][0])[:5]
-            //String srvec = "rvec"+toString(pose.rvec.get(0,0));
+          /*  Mat output = new Mat();
+            //output =
+            int num_labels = ArrayToMat(output);
+            int c1 = 1;
+            while (c1 < num_labels) {
+                w = stats[i, cv2.CC_STAT_WIDTH]
+                h = stats[i, cv2.CC_STAT_HEIGHT]
+                a = stats[i, cv2.CC_STAT_AREA]
 
+                if (a >= 2000) {
+                    Imgproc.rectangle(картинка,(l, t), (l + w, t + h), (123, 223, 134), 3);
+                    x = l + w // 2
+                    y = t + h // 2
+                    break;
+                }
+                xr, yr = asjhdakjhd(A, 0, math.radians(90 - 60), x, y, 15.5)
+
+            } */
 
             double distance = Math.sqrt(
                             Math.pow(pose.tvec.get(0, 0)[0], 2) +

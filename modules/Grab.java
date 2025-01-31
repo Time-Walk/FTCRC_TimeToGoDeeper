@@ -14,11 +14,11 @@ public class Grab extends Module {
         gl = hwmp.get(CRServo.class, "gl");
     }
     public void tele() {
-        if (gamepad2.y) { 
+        if (gamepad2.cross) {
             gl.setPower(-power);
             gr.setPower(power);
 
-        } else if (gamepad2.x) {
+        } else if (gamepad2.circle) {
             gl.setPower(power);
             gr.setPower(-power);
         } else {

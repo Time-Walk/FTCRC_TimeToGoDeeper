@@ -21,9 +21,9 @@ public class teleop extends LinearOpMode {
             R.wb.tele();
             R.gb.tele();
             R.ac.tele();
-           // R.lift.tele();
+            R.lift.tele();
             //if (gamepad2.a) {
-                R.lift.regulate();
+           //     R.lift.regulate();
             //}
 
 
@@ -31,7 +31,7 @@ public class teleop extends LinearOpMode {
             telemetry.addData("LB", R.wb.LB.getPower());
             telemetry.addData("RF", R.wb.RF.getPower());
             telemetry.addData("RB", R.wb.RB.getPower());
-            telemetry.addData("tiktok", R.lift.L.getCurrentPosition());
+            //telemetry.addData("tiktok", R.lift.L.getCurrentPosition());
             telemetry.addData("lp", R.lift.L.getPower());
             telemetry.addData("powah", Lift.ap);
            // telemetry.addData("gl", R.gb.gl.getPower());
