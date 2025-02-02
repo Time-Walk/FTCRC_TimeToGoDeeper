@@ -46,11 +46,19 @@ public class Wheelbase extends Module {
     public void setMtZero() { setMtPower(0, 0, 0, 0); }
 
     public void tele() {
-        double rf = gamepad1.left_stick_y + gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
-        double rb = gamepad1.left_stick_y - gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
         double lf = -gamepad1.left_stick_y + gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
         double lb = -gamepad1.left_stick_y - gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
+        double rf = gamepad1.left_stick_y + gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
+        double rb = gamepad1.left_stick_y - gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
         setMtPower(lf, lb, rf, rb);
+    }
+    public void zov() {
+        double lf = -gamepad1.left_stick_y + gamepad1.right_stick_x;
+        double lb = -gamepad1.left_stick_y + gamepad1.right_stick_x;
+        double rf =  gamepad1.left_stick_y + gamepad1.right_stick_x;
+        double rb =  gamepad1.left_stick_y + gamepad1.right_stick_x;
+        setMtPower(lf,lb,rf,rb);
+
     }
 
     public void timer(double lf, double lb, double rf, double rb, int millis) {

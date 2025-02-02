@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.scenes.tele.test;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.modules.IMUv2;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
-
+@Disabled
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telekop321")
 
 public class testteleop123 extends LinearOpMode {
