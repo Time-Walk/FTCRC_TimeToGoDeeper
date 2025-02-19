@@ -18,7 +18,7 @@ public class RotatePD {
     public RobotConstruct R;
     Telemetry telemetry;
     public static double kp = -0.0025;
-    public static double kd = -0.00025;
+    public static double kd = -0.00005;
     public static double kr = -0.075;
     public static double ErTarget = .1;
     public static double ErSpeedTarget = .5;
@@ -33,9 +33,7 @@ public class RotatePD {
     }
     LinearOpMode L;
     public void rotate(double degrees) {
-       // degrees = (degrees * (93.5/90));
         R.imuv2.init();
-        R.wb.initEncoderAuto();
         while ( (Math.abs(degrees - R.imuv2.getAngle()) > ErTarget || Math.abs((degrees - R.imuv2.getAngle()) - pd.ErLast) > ErSpeedTarget) && L.opModeIsActive() ) {
             double U = pd.tick(degrees - R.imuv2.getAngle());
             double Rele = kr * Math.signum(degrees-R.imuv2.getAngle());
@@ -51,6 +49,6 @@ public class RotatePD {
         telemetry.addData("RB", R.wb.RB.getCurrentPosition());
         telemetry.update();
         R.wb.setMtZero();
-        R.wb.delay(1000);
+        R.wb.delay(500);
     }
 }

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.scenes.tele.test;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -15,12 +16,13 @@ public class testteleop123 extends LinearOpMode {
         RobotConstruct R = new RobotConstruct();
         R.init(telemetry,this,hardwareMap);
         R.gamepad_init(gamepad1,gamepad2);
+        telemetry = FtcDashboard.getInstance().getTelemetry();
+        R.wb.initEncoderAuto();
         waitForStart();
         //wheelbase init encoder????
         while(!isStopRequested()) {
-
-
-
+            telemetry.addData("rfpos", R.wb.RF.getCurrentPosition());
+            telemetry.addData("lfpos", R.wb.LF.getCurrentPosition());
             telemetry.update();
         }
     }

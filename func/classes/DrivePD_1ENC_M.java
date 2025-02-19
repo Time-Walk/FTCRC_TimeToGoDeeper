@@ -15,8 +15,9 @@ public class DrivePD_1ENC_M {
     HardwareMap hwmp;
     RobotConstruct R;
     PD pdm;
-    public static double kp = 0.005;
-    public static double kd = 0.0005;
+    public static double kp = 0.0025;
+    public static double kd = 0.00025;
+    public static double speed = 0.01;
     public static double tickp = 0;
     public static double pwf = 0;
     public void init(RobotConstruct R, LinearOpMode L) {
@@ -25,13 +26,40 @@ public class DrivePD_1ENC_M {
         pdm = new PD();
         pdm.init(kp, kd);
     }
-    public void go(double tick) {
+    public void forward(double tick) {
         tickp = tick;
-        R.wb.initEncoderAuto();
+        R.wb.initEncoderLF();
         while ( (Math.abs(tickp)-Math.abs(R.wb.LF.getCurrentPosition()) > 10*Math.signum(tickp)) && L.opModeIsActive()) {
-            pwf = pdm.tick(tickp - R.wb.LF.getCurrentPosition());
-            R.wb.setMtPower(pwf, pwf, -pwf, -pwf);
+            pwf = speed*pdm.tick(tickp - R.wb.LF.getCurrentPosition());
+            R.wb.setMtPower(pwf, 0, 0, -pwf);
         }
         R.wb.setMtZero();
     }
+    public void backward(double tick) {
+        tickp = tick;
+        R.wb.initEncoderLF();
+        while ( (Math.abs(tickp)-Math.abs(R.wb.LF.getCurrentPosition()) > 10*Math.signum(tickp)) && L.opModeIsActive()) {
+            pwf = speed*pdm.tick(tickp - R.wb.LF.getCurrentPosition());
+            R.wb.setMtPower(-pwf, 0, 0, pwf);
+        }
+        R.wb.setMtZero();
+    }
+  /*  public void left(double tick) {
+        tickp = tick;
+        R.wb.initEncoderLF();
+        while ( (Math.abs(tickp)-Math.abs(R.wb.LF.getCurrentPosition()) > 10*Math.signum(tickp)) && L.opModeIsActive()) {
+            pwf = pdm.tick(tickp - R.wb.LF.getCurrentPosition());
+            R.wb.setMtPower(-pwf, pwf, -pwf, pwf);
+        }
+        R.wb.setMtZero();
+    }
+    public void right(double tick) {
+        tickp = tick;
+        R.wb.initEncoderLF();
+        while ( (Math.abs(tickp)-Math.abs(R.wb.LF.getCurrentPosition()) > 10*Math.signum(tickp)) && L.opModeIsActive()) {
+            pwf = pdm.tick(tickp - R.wb.LF.getCurrentPosition());
+            R.wb.setMtPower(pwf, -pwf, pwf, -pwf);
+        }
+        R.wb.setMtZero();
+    } */
 }

@@ -17,8 +17,8 @@ public class LiftPD {
     PD pdm;
     public static double kp = 0.005;
     public static double kd = 0;
-    public static double tickp = 0;
-    public static double pwf = 0;
+    public static double tickl = 0;
+    public static double pwfl = 0;
     public static double counterpower = 0;
     public void init(RobotConstruct R, LinearOpMode L) {
         this.R = R;
@@ -27,11 +27,11 @@ public class LiftPD {
         pdm.init(kp, kd);
     }
     public void go(double tick) {
-        tickp = tick;
+        tickl = tick;
         R.lift.initencoder();
-        while ( (Math.abs(tickp)-Math.abs(R.lift.L.getCurrentPosition()) > 10*Math.signum(tickp)) && L.opModeIsActive()) {
-            pwf = pdm.tick(tickp - R.lift.L.getCurrentPosition());
-            R.lift.L.setPower(pwf);
+        while ( (Math.abs(tickl)-Math.abs(R.lift.L.getCurrentPosition()) > 10*Math.signum(tickl)) && L.opModeIsActive()) {
+            pwfl = pdm.tick(tickl - R.lift.L.getCurrentPosition());
+            R.lift.L.setPower(pwfl);
         }
         R.lift.L.setPower(counterpower);
     }

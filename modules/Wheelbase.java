@@ -35,6 +35,10 @@ public class Wheelbase extends Module {
     //    RB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
+    public void initEncoderLF() {
+        LF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
 
     public void setMtPower(double lf, double lb, double rf, double rb) {
         LF.setPower(lf);

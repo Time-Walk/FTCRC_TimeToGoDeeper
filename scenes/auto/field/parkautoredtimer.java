@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.func.classes.DrivePD;
 import org.firstinspires.ftc.teamcode.func.classes.RotatePD;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 @Config
-@Autonomous(name="парковка красный", group="")
+@Autonomous(name="парковка синий", group="")
 public class parkautoredtimer extends LinearOpMode {
     public static double x = 20000;
     @Override

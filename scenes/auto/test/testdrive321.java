@@ -4,39 +4,51 @@ import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.pwfl;
 import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.pwfr;
 import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.tickl;
 import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.tickr;
+import static org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M.pwf;
+import static org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M.tickp;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.func.classes.DrivePD;
+import org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M;
+import org.firstinspires.ftc.teamcode.func.classes.LiftPD;
 import org.firstinspires.ftc.teamcode.func.classes.RotatePD;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 @Config
-@Autonomous(name="шедевр синий", group="")
-public class testdrive123 extends LinearOpMode {
-    public static double x = 1000;
+@Autonomous(name="шедевр адын энкоде", group="")
+public class testdrive321 extends LinearOpMode {
+    public static double a1 = 1200;
+    public static double a2 = 1200;
+    public static double a3 = 1200;
     @Override
     public void runOpMode() throws InterruptedException {
         RobotConstruct R = new RobotConstruct();
         R.init(telemetry, this, hardwareMap);
-        DrivePD drp = new DrivePD();
-        drp.init(R, this);
+        DrivePD_1ENC_M dpd = new DrivePD_1ENC_M();
+        dpd.init(R, this);
         RotatePD rpd = new RotatePD();
-        rpd.init(R, this);
+        rpd.init(R,this);
+        LiftPD lpd = new LiftPD();
+        lpd.init(R,this);
         waitForStart();
 
-        //okay, let's go!
+        dpd.forward(a1);
+        rpd.rotate(45);
+      /*  lpd.go(1000);
+        R.gb.gzv.setPosition(0.45);
+        lpd.go(-800); */
+        R.wb.delay(2000);
+        rpd.rotate(90);
+       // dpd.forward(a2);
+       // rpd.rotate(45);
 
-
-        drp.go(x);
         telemetry.addData("LFT", R.wb.LF.getCurrentPosition());
-        telemetry.addData("RFT", R.wb.RF.getCurrentPosition());
-        telemetry.addData("tl", tickl);
-        telemetry.addData("tr", tickr);
-        telemetry.addData("pl", pwfl);
-        telemetry.addData("pr", pwfr);
+        telemetry.addData("tl", tickp);
+        telemetry.addData("pr", pwf);
         telemetry.update();
         R.lift.delay(10000);
 

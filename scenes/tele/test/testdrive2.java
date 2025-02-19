@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.scenes.tele.test;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 @Config
+@Disabled
 @TeleOp(name="шедевр: тест меканум паравозик", group="")
 public class testdrive2 extends LinearOpMode {
     @Override

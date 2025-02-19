@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.scenes.tele.field;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.modules.Lift;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telekop")
-
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "ТЕЛЕОП_ВКЛЮЧИТЬ_БЕСЛПАТНО")
 public class teleop extends LinearOpMode {
-
     @Override
     public void runOpMode() throws  InterruptedException {
         RobotConstruct R = new RobotConstruct();
@@ -19,7 +18,7 @@ public class teleop extends LinearOpMode {
         while(!isStopRequested()) {
 
             //R.wb.tele();
-            R.wb.zov();
+            R.wb.tele();
             R.gb.tele();
             R.ac.tele();
             R.lift.tele();
