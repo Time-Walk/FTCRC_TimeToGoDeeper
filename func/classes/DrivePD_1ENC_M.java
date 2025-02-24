@@ -6,25 +6,24 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.func.classes.superclasses.PD;
-import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
+import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 
 @Config
 public class DrivePD_1ENC_M {
     Telemetry telemetry;
     LinearOpMode L;
     HardwareMap hwmp;
-    RobotConstruct R;
+    RobotPortal R;
     PD pdm;
     public static double kp = 0.0025;
     public static double kd = 0.00025;
     public static double speed = 0.01;
     public static double tickp = 0;
     public static double pwf = 0;
-    public void init(RobotConstruct R, LinearOpMode L) {
+    public void init(RobotPortal R, LinearOpMode L) {
         this.R = R;
         this.L = L;
-        pdm = new PD();
-        pdm.init(kp, kd);
+        pdm = new PD(kp, kd);
     }
     public void forward(double tick) {
         tickp = tick;

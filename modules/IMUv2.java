@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 public class IMUv2 extends Module {
     BHI260IMU imu;
 
-    public void init() {
-        imu = hwmp.get(BHI260IMU.class, "imu");
+    public void initModule() {
+        imu = P.hwmp.get(BHI260IMU.class, "imu");
         imu.initialize(new IMU.Parameters(
                 new RevHubOrientationOnRobot(
                         RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
@@ -26,5 +26,8 @@ public class IMUv2 extends Module {
     public double getAngle() {
         Orientation orientation = imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         return orientation.firstAngle;
+    }
+    public void reset() {
+        imu.resetYaw();
     }
 }

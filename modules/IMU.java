@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 
 public class IMU extends Module {
     BNO055IMU imu;
-    public void init() { //Инициализация:
+    public void initModule() { //Инициализация:
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters(); // инициализация Акселерометра
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -20,20 +20,20 @@ public class IMU extends Module {
         parameters.loggingEnabled = true;
         parameters.loggingTag = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-        imu = hwmp.get(BNO055IMU.class, "imu");
+        imu = P.hwmp.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
        // while (!imu.isGyroCalibrated()) { //Калибровка акселерометра
             delay(30);
-            telemetry.addData(String.valueOf(imu.isAccelerometerCalibrated()), "ac");
-            telemetry.addData(String.valueOf(imu.isGyroCalibrated()), "gc");
-            telemetry.addData(String.valueOf(imu.isMagnetometerCalibrated()), "mc");
-            telemetry.addData(String.valueOf(imu.isSystemCalibrated()), "sc");
-            telemetry.addData(String.valueOf(imu.getCalibrationStatus()), "cls");
-            telemetry.addData(String.valueOf(imu.getSystemStatus()), "ss");
-            telemetry.addData(String.valueOf(imu.getSystemError()), "se");
-            telemetry.addData(String.valueOf(imu.getParameters()), "sp");
-            telemetry.addData("Wait", "Calibration"); //Сообщение о калибровке
-            telemetry.update();
+            P.telemetry.addData(String.valueOf(imu.isAccelerometerCalibrated()), "ac");
+            P.telemetry.addData(String.valueOf(imu.isGyroCalibrated()), "gc");
+            P.telemetry.addData(String.valueOf(imu.isMagnetometerCalibrated()), "mc");
+            P.telemetry.addData(String.valueOf(imu.isSystemCalibrated()), "sc");
+            P.telemetry.addData(String.valueOf(imu.getCalibrationStatus()), "cls");
+            P.telemetry.addData(String.valueOf(imu.getSystemStatus()), "ss");
+            P.telemetry.addData(String.valueOf(imu.getSystemError()), "se");
+            P.telemetry.addData(String.valueOf(imu.getParameters()), "sp");
+            P.telemetry.addData("Wait", "Calibration"); //Сообщение о калибровке
+            P.telemetry.update();
         }
         //telemetry.addData("Done!", "Calibrated"); //Сообщение об окончании калибровки
         //telemetry.update();

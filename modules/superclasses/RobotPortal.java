@@ -13,10 +13,7 @@ import org.firstinspires.ftc.teamcode.modules.Lift;
 import org.firstinspires.ftc.teamcode.modules.Wheelbase;
 import org.firstinspires.ftc.teamcode.modules.camera.CameraOut;
 
-public class RobotConstruct {
-    public Telemetry telemetry;
-    public LinearOpMode L;
-    public HardwareMap hwpm;
+public class RobotPortal {
     public Wheelbase wb;
     public Grab gb;
     public Ascent ac;
@@ -24,47 +21,32 @@ public class RobotConstruct {
     public IMU imu;
     public IMUv2 imuv2;
     public CameraOut cam;
+    public RobotPack P;
 
 
-    public void init(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp) { // init fields here
-        this.telemetry = telemetry;
-        this.L = L;
-        this.hwpm = hwmp;
+    public RobotPortal(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp, Gamepad gamepad1, Gamepad gamepad2) { // init fields here
+        P = new RobotPack(L, hwmp, telemetry, gamepad1, gamepad2);
 
         wb = new Wheelbase();
-        wb.initFields(telemetry,L,hwmp);
-        wb.init();
+        wb.init(P);
         //init encoder???
 
         gb = new Grab();
-        gb.initFields(telemetry,L,hwmp);
-        gb.init();
+        gb.init(P);
 
         ac = new Ascent();
-        ac.initFields(telemetry,L,hwmp);
-        ac.init();
+        ac.init(P);
 
         lift = new Lift();
-        lift.initFields(telemetry,L,hwmp);
-        lift.init();
+        lift.init(P);
 
         imuv2 = new IMUv2();
-        imuv2.initFields(telemetry,L,hwmp);
-        imuv2.init();
+        imuv2.init(P);
 
         cam = new CameraOut();
-        cam.initFields(telemetry,L,hwmp);
-        cam.init();
+        cam.init(P);
 
 
 
     }
-
-public void gamepad_init(Gamepad gamepad1, Gamepad gamepad2){ //init gamepad here
-        //
-    wb.init_gamepad(gamepad1,gamepad2);
-    gb.init_gamepad(gamepad1,gamepad2);
-    ac.init_gamepad(gamepad1,gamepad2);
-    lift.init_gamepad(gamepad1,gamepad2);
-}
 }

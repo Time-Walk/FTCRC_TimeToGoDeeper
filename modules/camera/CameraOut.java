@@ -13,16 +13,16 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 public class CameraOut extends Module {
     public OpenCvCamera camera;
-    public void init() {
-        int cameraMonitorViewId = hwmp.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwmp.appContext.getPackageName());
+    public void initModule() {
+        int cameraMonitorViewId = P.hwmp.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", P.hwmp.appContext.getPackageName());
         // получение Id монитора камеры
-        WebcamName webcamName = hwmp.get(WebcamName.class, "Webcam"); // получение имени камеры из конфига
+        WebcamName webcamName = P.hwmp.get(WebcamName.class, "Webcam"); // получение имени камеры из конфига
         camera = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId); // получение экземпляра камеры
     }
 
     public void openWithPipeline(OpenCvPipeline pipe, boolean isStreamToDash) {
-        telemetry.addData("camera", "started open");
-        telemetry.update();
+        P.telemetry.addData("camera", "started open");
+        P.telemetry.update();
         camera.setPipeline(pipe);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
@@ -32,8 +32,8 @@ public class CameraOut extends Module {
                     FtcDashboard dash = FtcDashboard.getInstance();
                     dash.startCameraStream(camera, 30);
                 }
-                telemetry.addData("camera", "opened");
-                telemetry.update();
+                P.telemetry.addData("camera", "opened");
+                P.telemetry.update();
             }
 
             @Override

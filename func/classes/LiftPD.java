@@ -6,25 +6,24 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.func.classes.superclasses.PD;
-import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
+import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 
 @Config
 public class LiftPD {
     Telemetry telemetry;
     LinearOpMode L;
     HardwareMap hwmp;
-    RobotConstruct R;
+    RobotPortal R;
     PD pdm;
     public static double kp = 0.005;
     public static double kd = 0;
     public static double tickl = 0;
     public static double pwfl = 0;
     public static double counterpower = 0;
-    public void init(RobotConstruct R, LinearOpMode L) {
+    public void init(RobotPortal R, LinearOpMode L) {
         this.R = R;
         this.L = L;
-        pdm = new PD();
-        pdm.init(kp, kd);
+        pdm = new PD(kp, kd);
     }
     public void go(double tick) {
         tickl = tick;

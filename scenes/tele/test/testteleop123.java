@@ -3,27 +3,24 @@ package org.firstinspires.ftc.teamcode.scenes.tele.test;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.modules.IMUv2;
-import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
+import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
+import org.firstinspires.ftc.teamcode.scenes.superclasses.TeleOpPack;
+
 @Disabled
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Telekop321")
+@TeleOp(name = "Telekop321")
 
-public class testteleop123 extends LinearOpMode {
-
+public class testteleop123 extends TeleOpPack {
     @Override
-    public void runOpMode() throws  InterruptedException {
-        RobotConstruct R = new RobotConstruct();
-        R.init(telemetry,this,hardwareMap);
-        R.gamepad_init(gamepad1,gamepad2);
+    public void doSetup() {
         telemetry = FtcDashboard.getInstance().getTelemetry();
         R.wb.initEncoderAuto();
-        waitForStart();
-        //wheelbase init encoder????
-        while(!isStopRequested()) {
-            telemetry.addData("rfpos", R.wb.RF.getCurrentPosition());
-            telemetry.addData("lfpos", R.wb.LF.getCurrentPosition());
-            telemetry.update();
-        }
+    }
+    @Override
+    public void doActions() {
+        telemetry.addData("rfpos", R.wb.RF.getCurrentPosition());
+        telemetry.addData("lfpos", R.wb.LF.getCurrentPosition());
+        telemetry.update();
     }
 }

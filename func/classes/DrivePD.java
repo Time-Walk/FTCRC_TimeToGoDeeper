@@ -7,13 +7,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.func.classes.superclasses.PD;
-import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
+import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 @Config
 public class DrivePD {
     Telemetry telemetry;
     LinearOpMode L;
     HardwareMap hwmp;
-    RobotConstruct R;
+    RobotPortal R;
     PD pdl, pdr;
     public static double kp = 0.005;
     public static double kd = 0.0005;
@@ -22,13 +22,11 @@ public class DrivePD {
     public static double tickr = 0;
     public static double pwfl = 0;
     public static double pwfr = 0;
-    public void init(RobotConstruct R, LinearOpMode L) {
+    public void init(RobotPortal R, LinearOpMode L) {
         this.R = R;
         this.L = L;
-        pdl = new PD();
-        pdl.init(kp,kd);
-        pdr = new PD();
-        pdr.init(kp,kd);
+        pdl = new PD(kp,kd);
+        pdr = new PD(kp,kd);
         telemetry = FtcDashboard.getInstance().getTelemetry();
     }
     public void go(double tick) {

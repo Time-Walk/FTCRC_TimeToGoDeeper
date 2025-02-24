@@ -6,22 +6,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.func.classes.DrivePD;
 import org.firstinspires.ftc.teamcode.func.classes.RotatePD;
-import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
+import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
+import org.firstinspires.ftc.teamcode.scenes.superclasses.AutonomousPack;
+
 @Config
 @Autonomous(name="парковка+проба", group="")
-public class parkprobeblueencoder extends LinearOpMode {
+public class parkprobeblueencoder extends AutonomousPack {
     public static double forward = 3500;
     public static double backward = -1250;
     public static long delay = 2000;
     @Override
-    public void runOpMode() throws InterruptedException {
-        RobotConstruct R = new RobotConstruct();
-        R.init(telemetry, this, hardwareMap);
-        DrivePD drp = new DrivePD();
-        drp.init(R, this);
-        RotatePD rpd = new RotatePD();
-        rpd.init(R, this);
-        waitForStart();/*
+    public void doActions() {/*
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
         R.wb.timer(-0.2,-0.2,0.2,0.2,500);

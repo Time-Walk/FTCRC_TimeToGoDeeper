@@ -1,40 +1,34 @@
 package org.firstinspires.ftc.teamcode.scenes.auto.test;
 
-import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.pwfl;
-import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.pwfr;
-import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.tickl;
-import static org.firstinspires.ftc.teamcode.func.classes.DrivePD.tickr;
 import static org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M.pwf;
 import static org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M.tickp;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.func.classes.DrivePD;
 import org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M;
 import org.firstinspires.ftc.teamcode.func.classes.LiftPD;
 import org.firstinspires.ftc.teamcode.func.classes.RotatePD;
-import org.firstinspires.ftc.teamcode.modules.superclasses.RobotConstruct;
+import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
+import org.firstinspires.ftc.teamcode.scenes.superclasses.AutonomousPack;
+
 @Config
 @Autonomous(name="шедевр адын энкоде", group="")
-public class testdrive321 extends LinearOpMode {
+public class testdrive321 extends AutonomousPack {
     public static double a1 = 1200;
     public static double a2 = 1200;
     public static double a3 = 1200;
+    public DrivePD_1ENC_M dpd;
     @Override
-    public void runOpMode() throws InterruptedException {
-        RobotConstruct R = new RobotConstruct();
-        R.init(telemetry, this, hardwareMap);
+    public void doSetup() {
         DrivePD_1ENC_M dpd = new DrivePD_1ENC_M();
         dpd.init(R, this);
-        RotatePD rpd = new RotatePD();
-        rpd.init(R,this);
         LiftPD lpd = new LiftPD();
         lpd.init(R,this);
-        waitForStart();
+    }
+    @Override
+    public void doActions() {
 
         dpd.forward(a1);
         rpd.rotate(45);

@@ -9,17 +9,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
     abstract public class Module {
-        public Telemetry telemetry;
-        public LinearOpMode L;
-        public HardwareMap hwmp;
-        public Gamepad gamepad1, gamepad2;
-        abstract public void init();
-        public void initFields(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp) {
-            this.telemetry = telemetry; this.L = L; this.hwmp = hwmp;
+        public RobotPack P;
+        public void init(RobotPack P) {
+            this.P = P;
+            initModule();
         }
-        public void init_gamepad(Gamepad gamepad1, Gamepad gamepad2) {
-            this.gamepad1 = gamepad1; this.gamepad2 = gamepad2;
-        }
+        abstract public void initModule();
         public void delay(long millis) {
             try {
                 Thread.sleep(millis);

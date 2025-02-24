@@ -6,11 +6,11 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 
 public class Wheelbase extends Module {
     public DcMotor LF, RF, LB, RB;
-    public void init() {
-        LF = hwmp.get(DcMotor.class, "LF");
-        RF = hwmp.get(DcMotor.class, "RF");
-        LB = hwmp.get(DcMotor.class, "LB");
-        RB = hwmp.get(DcMotor.class, "RB");
+    public void initModule() {
+        LF = P.hwmp.get(DcMotor.class, "LF");
+        RF = P.hwmp.get(DcMotor.class, "RF");
+        LB = P.hwmp.get(DcMotor.class, "LB");
+        RB = P.hwmp.get(DcMotor.class, "RB");
 
         LF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         RF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -50,17 +50,17 @@ public class Wheelbase extends Module {
     public void setMtZero() { setMtPower(0, 0, 0, 0); }
 
     public void tele() {
-        double lf = -gamepad1.left_stick_y + gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
-        double lb = -gamepad1.left_stick_y - gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
-        double rf = gamepad1.left_stick_y + gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
-        double rb = gamepad1.left_stick_y - gamepad1.left_stick_x + (gamepad1.right_stick_x * 0.6);
+        double lf = -P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        double lb = -P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        double rf = P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        double rb = P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
         setMtPower(lf, lb, rf, rb);
     }
     public void zov() {
-        double lf = -gamepad1.left_stick_y + gamepad1.right_stick_x;
-        double lb = -gamepad1.left_stick_y + gamepad1.right_stick_x;
-        double rf =  gamepad1.left_stick_y + gamepad1.right_stick_x;
-        double rb =  gamepad1.left_stick_y + gamepad1.right_stick_x;
+        double lf = -P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
+        double lb = -P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
+        double rf =  P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
+        double rb =  P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
         setMtPower(lf,lb,rf,rb);
 
     }
