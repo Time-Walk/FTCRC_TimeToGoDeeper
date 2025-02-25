@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.scenes.tele.test;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -14,14 +15,11 @@ public class liftsetup extends TeleOpPack {
     public static int pos2 = 500;
     @Override
     public void doSetup() {
+        telemetry = FtcDashboard.getInstance().getTelemetry();
+        R.P.telemetry = telemetry;
         lpd = new LiftPID(R);
         telemetry.addData("Er", 0);
         telemetry.update();
-    }
-    @Override
-    public void doSetupMovings() {
-        R.lift.execute();
-        R.lift.initencoder();
     }
     @Override
     public void doActions() {
