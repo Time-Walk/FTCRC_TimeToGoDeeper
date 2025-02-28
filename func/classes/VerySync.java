@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 public class VerySync {
     PD pd;
     RobotPortal R;
-    public static double kp = .04;
-    public static double kd = .3;
+    public static double kp = .015;
+    public static double kd = .065;
     public boolean isRot = false;
     public double upAngle = -91;
     public double goal = 0;
@@ -32,12 +32,12 @@ public class VerySync {
             if ( last < 0 ) {
                 err180fix = 1;
                 this.goal = goal+360;
-                directionOfRotation *= -1;
+                //directionOfRotation *= -1;
             }
             else {
                 err180fix = -1;
                 this.goal = goal-360;
-                directionOfRotation *= -1;
+                //directionOfRotation *= -1;
             }
         }
         else {
@@ -56,10 +56,12 @@ public class VerySync {
             if (angle > 0 && err180fix == 1) {
                 goal -= 360;
                 err180fix = 0;
+                directionOfRotation *= -1;
             }
             if (angle < 0 && err180fix == -1) {
                 goal += 360;
                 err180fix = 0;
+                directionOfRotation *= -1;
             }
             angle += (360 * err180fix);
             double Er = angle - goal;
@@ -68,18 +70,29 @@ public class VerySync {
             pwBR = pw;
             pwFL = pw;
             pwFR = pw;
+            R.P.telemetry.addData("pw", pw);
+            R.P.telemetry.addData("angle", angle);
+            R.P.telemetry.addData("Er", Er);
             if ( directionOfRotation < 0 ) {
                 if ( angle < goal || Math.abs(angle - goal) < 5 ) {
                     isRot = false;
                     pwFR = 0; pwBR = 0; pwFL = 0; pwBL = 0;
+                    err180fix = 0;
                 }
             }
             else {
                 if ( angle > goal || Math.abs(angle - goal) < 5) {
                     isRot = false;
                     pwBL = 0; pwFL = 0; pwFR = 0; pwBR = 0;
+                    err180fix = 0;
                 }
             }
         }
+        R.P.telemetry.addData("goal", goal);
+        R.P.telemetry.addData("upAngle", upAngle);
+        R.P.telemetry.addData("err180fix", err180fix);
+        R.P.telemetry.addData("directionOfRot", directionOfRotation);
+        R.P.telemetry.addData("RealAngle", R.imuv2.getAngle());
+        R.P.telemetry.update();
     }
 }

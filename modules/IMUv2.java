@@ -25,7 +25,7 @@ public class IMUv2 extends Module {
     }
     public double getAngle() {
         Orientation orientation = imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        return orientation.firstAngle;
+        return -orientation.firstAngle;
     }
     public void reset() {
         imu.resetYaw();

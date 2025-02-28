@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.modules.Grab;
 import org.firstinspires.ftc.teamcode.modules.IMU;
 import org.firstinspires.ftc.teamcode.modules.IMUv2;
 import org.firstinspires.ftc.teamcode.modules.Lift;
+import org.firstinspires.ftc.teamcode.modules.RGBps;
 import org.firstinspires.ftc.teamcode.modules.Wheelbase;
 import org.firstinspires.ftc.teamcode.modules.camera.CameraOut;
 
@@ -22,6 +23,7 @@ public class RobotPortal {
     public IMUv2 imuv2;
     public CameraOut cam;
     public RobotPack P;
+    public RGBps rgb;
 
 
     public RobotPortal(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp, Gamepad gamepad1, Gamepad gamepad2) { // init fields here
@@ -46,6 +48,8 @@ public class RobotPortal {
         cam = new CameraOut();
         cam.init(P);
 
+        rgb = new RGBps();
+        rgb.init(P);
 
 
     }

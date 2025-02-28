@@ -16,8 +16,9 @@ public class teleopwithdh extends TeleOpPack {
     }
     @Override
     public void doSetupMovings() {
-        R.lift.execute();
-        R.lift.initencoder();
+        //R.lift.execute();
+        //R.lift.initencoder();
+        R.rgb.state = false;
     }
     @Override
     public void doActions() {

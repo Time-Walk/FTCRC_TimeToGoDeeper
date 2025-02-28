@@ -1,10 +1,15 @@
 package org.firstinspires.ftc.teamcode.modules;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 
+@Config
 public class Wheelbase extends Module {
+    public static double speedChangeCoef = .3333;
+    boolean flag = false;
+    double curSpeedCoef = 1;
     public DcMotor LF, RF, LB, RB;
     public void initModule() {
         LF = P.hwmp.get(DcMotor.class, "LF");
@@ -50,10 +55,28 @@ public class Wheelbase extends Module {
     public void setMtZero() { setMtPower(0, 0, 0, 0); }
 
     public void tele() {
+        if ( P.gamepad1.right_bumper ) {
+            if ( !flag ) {
+                flag = true;
+                if ( curSpeedCoef > .99 ) {
+                    curSpeedCoef = speedChangeCoef;
+                }
+                else {
+                    curSpeedCoef = 1;
+                }
+            }
+        }
+        else {
+            if ( flag ) { flag = false; }
+        }
         double lf = -P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        lf *= curSpeedCoef;
         double lb = -P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        lb *= curSpeedCoef;
         double rf = P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        rf *= curSpeedCoef;
         double rb = P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6);
+        rb *= curSpeedCoef;
         setMtPower(lf, lb, rf, rb);
     }
     public void zov() {

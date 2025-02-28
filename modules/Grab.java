@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 public class Grab extends Module {
     public Servo gzv;
     public CRServo zov_l, zov_r;
-    public static double position_open = 0.4;
-    public static double position_close = 0.675;
+    public static double position_open = 0.5;
+    public static double position_close = 1;
     @Override
     public void initModule() {
         gzv = P.hwmp.get(Servo.class, "gzv");
@@ -35,11 +35,11 @@ public class Grab extends Module {
             zov_r.setPower(0);
         }
         if (P.gamepad2.left_bumper) {
-            zov_l.setPower(0.25);
-            zov_r.setPower(0.25);
+            zov_l.setPower(-1);
+            zov_r.setPower(-1);
         } else if (P.gamepad2.right_bumper) {
-            zov_l.setPower(-0.25);
-            zov_r.setPower(-0.25);
+            zov_l.setPower(1);
+            zov_r.setPower(1);
         }
 
     }

@@ -22,15 +22,15 @@ public class Lift extends Module {
         L_L.setPower(-P.gamepad2.right_stick_y*0.34);
     }
     public void initencoder() {
-        L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void execute() {
-        L.setPower(-1);
+        /*L.setPower(-1);
         delay(700);
         L.setPower(.2);
         delay(400);
-        L.setPower(0);
+        L.setPower(0);*/
     }
 
 }
