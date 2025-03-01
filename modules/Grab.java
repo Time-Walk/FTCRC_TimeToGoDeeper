@@ -24,10 +24,10 @@ public class Grab extends Module {
         } else if (P.gamepad2.a) {
             gzv.setPosition(position_close);
         }
-        if (P.gamepad2.left_trigger > 0.5) {
+        if (P.gamepad2.right_trigger > 0.5) {
             zov_l.setPower(0.25);
             zov_r.setPower(-0.25);
-        } else if (P.gamepad2.right_trigger > 0.5) {
+        } else if (P.gamepad2.left_trigger > 0.5) {
             zov_l.setPower(-0.25);
             zov_r.setPower(0.25);
         } else {
