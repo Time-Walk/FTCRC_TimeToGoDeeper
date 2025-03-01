@@ -5,6 +5,7 @@ import static org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M.tickp;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.func.classes.DrivePD_1ENC_M;
@@ -12,7 +13,7 @@ import org.firstinspires.ftc.teamcode.func.classes.LiftPD;
 import org.firstinspires.ftc.teamcode.func.classes.RotatePD;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 import org.firstinspires.ftc.teamcode.scenes.superclasses.AutonomousPack;
-
+@Disabled
 @Config
 @Autonomous(name="шедевр адын энкоде", group="")
 public class testdrive321 extends AutonomousPack {

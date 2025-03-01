@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode.scenes.auto.test;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 import org.firstinspires.ftc.teamcode.modules.camera.AprilTagDetectionPipeline;
 import org.firstinspires.ftc.teamcode.scenes.superclasses.AutonomousPack;
-
+@Disabled
 @Autonomous(name="CameraTest", group="")
 public class CameraTest extends AutonomousPack {
     @Override
