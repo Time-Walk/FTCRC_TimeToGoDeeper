@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.modules.camera;
+package org.firstinspires.ftc.teamcode.modules.camera.pipelines;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -6,7 +6,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-public class Pipeline extends OpenCvPipeline {
+public class Pipeline extends OpenCvPipeline { // Отладочный Pipeline
     boolean viewportPaused;
 
     /*

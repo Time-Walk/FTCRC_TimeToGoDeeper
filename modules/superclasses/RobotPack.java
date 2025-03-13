@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class RobotPack {
+public class RobotPack { // Класс для хранения деффолтных переменных
     public LinearOpMode L;
     public HardwareMap hwmp;
     public Telemetry telemetry;

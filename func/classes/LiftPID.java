@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.func.classes.superclasses.PID;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 
 @Config
-public class LiftPID {
+public class LiftPID { // Синхронный PID-регулятор для лифта
     public RobotPortal R;
     public static double kp = .3;
     public static double ki = .03;
@@ -19,14 +19,14 @@ public class LiftPID {
         pid = new PID(kp, ki, kd);
         R.lift.initencoder();
     }
-    public void setPosition(int ticks) {
+    public void setPosition(int ticks) { // Устновить новый таргет
         curTicks = ticks;
     }
-    public double tick() {
+    public double tick() { // Синхронный тик регулятора
         double Er = curTicks - R.lift.L.getCurrentPosition();
         return pid.tick(Er);
     }
-    public void getToPosition() {
+    public void getToPosition() { // Остановить программу, ждать пока лифт не достигнет нужной позиции
         while ( Math.abs( curTicks - R.lift.L.getCurrentPosition() ) > possibleDifference ) {
             R.lift.L.setPower(tick());
             R.P.telemetry.addData("Er", curTicks - R.lift.L.getCurrentPosition());

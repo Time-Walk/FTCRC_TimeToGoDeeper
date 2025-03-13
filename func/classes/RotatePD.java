@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.func.classes.superclasses.PD;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 
 @Config
-public class RotatePD {
+public class RotatePD { // PD-регулятор поворота по гироскопу
     PD pd;
     public RobotPortal R;
     Telemetry telemetry;

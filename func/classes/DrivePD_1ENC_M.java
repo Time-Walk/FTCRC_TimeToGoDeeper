@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.func.classes.superclasses.PD;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 
 @Config
-public class DrivePD_1ENC_M {
+public class DrivePD_1ENC_M { // Езда по энкодеру по одной оси
     Telemetry telemetry;
     LinearOpMode L;
     HardwareMap hwmp;

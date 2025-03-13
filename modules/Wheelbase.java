@@ -80,10 +80,14 @@ public class Wheelbase extends Module {
         setMtPower(lf, lb, rf, rb);
     }
     public void zov() {
-        double lf = -P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
-        double lb = -P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
-        double rf =  P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
-        double rb =  P.gamepad1.left_stick_y + P.gamepad1.right_stick_x;
+        double z = 0;
+        double v =0;
+        if (P.gamepad1.dpad_up) {z=-1;} else if (P.gamepad1.dpad_down) {z=1;}
+        if (P.gamepad1.dpad_left) {v=1;} else if (P.gamepad1.dpad_right) {v=-1;}
+        double lf = -P.gamepad1.left_stick_y + P.gamepad1.right_stick_x - z - v;
+        double lb = -P.gamepad1.left_stick_y + P.gamepad1.right_stick_x - z + v;
+        double rf =  P.gamepad1.left_stick_y + P.gamepad1.right_stick_x + z - v;
+        double rb =  P.gamepad1.left_stick_y + P.gamepad1.right_stick_x + z + v;
         setMtPower(lf,lb,rf,rb);
 
     }

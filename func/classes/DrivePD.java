@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.func.classes.superclasses.PD;
 import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
-@Config
-public class DrivePD {
+@Config // Конфигурируется из Ftc Dashboard
+public class DrivePD { // Езда по энкодерам по двум осям
     Telemetry telemetry;
     LinearOpMode L;
     HardwareMap hwmp;
@@ -25,7 +25,7 @@ public class DrivePD {
     public void init(RobotPortal R, LinearOpMode L) {
         this.R = R;
         this.L = L;
-        pdl = new PD(kp,kd);
+        pdl = new PD(kp,kd); // Создает два отдельных регулятора на каждую из осей движения
         pdr = new PD(kp,kd);
         telemetry = FtcDashboard.getInstance().getTelemetry();
     }
@@ -33,12 +33,12 @@ public class DrivePD {
         tickl = tick;
         tickr = tick;
         R.wb.initEncoderAuto();
-        while ( (Math.abs(tickl)-Math.abs(R.wb.LF.getCurrentPosition()) > 10*Math.signum(tickl)) && (Math.abs(tickr)-Math.abs(R.wb.RF.getCurrentPosition()) > 10*Math.signum(tickr)) && L.opModeIsActive()) {
+        while ( (Math.abs(tickl)-Math.abs(R.wb.LF.getCurrentPosition()) > 10*Math.signum(tickl)) && (Math.abs(tickr)-Math.abs(R.wb.RF.getCurrentPosition()) > 10*Math.signum(tickr)) && L.opModeIsActive()) {  // Пока обе оси не доехали
             pwfl = speed*pdl.tick(tickl - R.wb.LF.getCurrentPosition());
-            pwfr = speed*pdr.tick(tickr + R.wb.RF.getCurrentPosition());
+            pwfr = speed*pdr.tick(tickr + R.wb.RF.getCurrentPosition()); // Получение управляющего воздействия с регуляторов
             pwfl = pwfl*Math.abs((100+tickl)/R.wb.LF.getCurrentPosition());
             pwfr = pwfr*Math.abs((100+tickr)/R.wb.RF.getCurrentPosition());
-            R.wb.setMtPower(pwfr, pwfr, -pwfl, -pwfl);
+            R.wb.setMtPower(pwfr, pwfr, -pwfl, -pwfl); // И установка на моторы
             telemetry.addData("left",tickl - R.wb.LF.getCurrentPosition());
             telemetry.addData("right",tickr + R.wb.RF.getCurrentPosition());
             telemetry.update();

@@ -8,11 +8,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
-    abstract public class Module {
-        public RobotPack P;
+    abstract public class Module { // Родитель для классов модулей робота
+        public RobotPack P; // Пак, хранящий в себе LinearOpMode, Telemetry, HardwareMap и Gamepad'ы
         public void init(RobotPack P) {
-            this.P = P;
-            initModule();
+            this.P = P; // Сохранение этого пака
+            initModule(); // Вызов абстракного метода для инициализации модуля робота
         }
         abstract public void initModule();
         public void delay(long millis) {

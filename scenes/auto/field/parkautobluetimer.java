@@ -17,7 +17,7 @@ public class parkautobluetimer extends AutonomousPack {
     public void doActions() {
 
         R.wb.timer(0.5,-0.5,0.5,-0.5, 2000);
-        R.wb.timer(0.5,0.5,-0.5,-0.5,1000);
+        R.wb.timer(-0.5,-0.5,0.5,0.5,777);
     }
 }
 //

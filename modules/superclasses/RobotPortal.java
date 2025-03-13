@@ -12,9 +12,9 @@ import org.firstinspires.ftc.teamcode.modules.IMUv2;
 import org.firstinspires.ftc.teamcode.modules.Lift;
 import org.firstinspires.ftc.teamcode.modules.RGBps;
 import org.firstinspires.ftc.teamcode.modules.Wheelbase;
-import org.firstinspires.ftc.teamcode.modules.camera.CameraOut;
+import org.firstinspires.ftc.teamcode.modules.camera.basic.CameraOut;
 
-public class RobotPortal {
+public class RobotPortal { // Класс для создания, хранения и инициализации классов модулей робота
     public Wheelbase wb;
     public Grab gb;
     public Ascent ac;
@@ -26,7 +26,7 @@ public class RobotPortal {
     public RGBps rgb;
 
 
-    public RobotPortal(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp, Gamepad gamepad1, Gamepad gamepad2) { // init fields here
+    public RobotPortal(Telemetry telemetry, LinearOpMode L, HardwareMap hwmp, Gamepad gamepad1, Gamepad gamepad2) {
         P = new RobotPack(L, hwmp, telemetry, gamepad1, gamepad2);
 
         wb = new Wheelbase();
