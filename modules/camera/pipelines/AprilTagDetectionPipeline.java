@@ -25,10 +25,10 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline { // Pipeline дл
     public boolean isAprilTagDetected = false;
     public AprilTagDetection detection = null;
 
-    public static double fx = 601.32512335;
-    public static double fy = 605.96041909;
-    public static double cx = 379.76580887;
-    public static double cy = 186.47226305;
+    public static double fx = 606.09099172;
+    public static double fy = 604.85091102;
+    public static double cx = 327.60608074;
+    public static double cy = 228.55822173;
 
     static final double TAGSIZE = .1016;
     public RobotPack P;

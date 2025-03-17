@@ -54,6 +54,14 @@ public class Wheelbase extends Module {
 
     public void setMtZero() { setMtPower(0, 0, 0, 0); }
 
+    public void setAxisPower(double Rx, double Ry, double Rr) {
+        double lf = Ry + Rx + Rr;
+        double lb = Ry - Rx + Rr;
+        double rf = -Ry + Rx + Rr;
+        double rb = -Ry - Rx + Rr;
+        setMtPower(lf, lb, rf, rb);
+    }
+
     public void tele() {
         if ( P.gamepad1.right_bumper ) {
             if ( !flag ) {

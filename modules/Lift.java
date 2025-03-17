@@ -12,6 +12,7 @@ public class Lift extends Module {
         L = P.hwmp.get(DcMotor.class, "LC");
         L_L = P.hwmp.get(DcMotor.class, "LL");
         L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        L_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void tele() {
         //L.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

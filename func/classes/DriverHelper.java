@@ -65,15 +65,15 @@ public class DriverHelper { // Класс с функциями, облегча�
             }
             double z = 0;
             double v =0;
-            if (P.gamepad1.dpad_up) {z=-.7;} else if (P.gamepad1.dpad_down) {z=.7;}
-            if (P.gamepad1.dpad_left) {v=.7;} else if (P.gamepad1.dpad_right) {v=-.7;} // Управление с помощью dpad
-            double lf = -P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) - z - v;
+            if (P.gamepad1.dpad_up) {z=.7;} else if (P.gamepad1.dpad_down) {z=-.7;}
+            if (P.gamepad1.dpad_left) {v=-.7;} else if (P.gamepad1.dpad_right) {v=.7;} // Управление с помощью dpad
+            double lf = -P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) + z + v;
             lf *= curSpeedCoef;
-            double lb = -P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) - z + v;
+            double lb = -P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) + z - v;
             lb *= curSpeedCoef;
-            double rf = P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) + z - v;
+            double rf = P.gamepad1.left_stick_y + P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) - z + v;
             rf *= curSpeedCoef;
-            double rb = P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) + z + v;
+            double rb = P.gamepad1.left_stick_y - P.gamepad1.left_stick_x + (P.gamepad1.right_stick_x * 0.6) - z - v;
             rb *= curSpeedCoef;
             setMtPower(lf+verySync.pwFL, lb+verySync.pwBL, rf+verySync.pwFR, rb+verySync.pwBR); // Подсчет и установка мощности на моторы, учитывая синхронный регулятор поворота
         }
@@ -91,10 +91,10 @@ public class DriverHelper { // Класс с функциями, облегча�
             double rb_start = 315;
             double rb_angle = rb_start+R.imuv2.getAngle();
 
-            double lf = -1*Math.cos(lf_angle)*P.gamepad1.left_stick_x;
-            double lb = -1*Math.cos(lb_angle)*P.gamepad1.left_stick_x;
-            double rf = -1*Math.cos(rf_angle)*P.gamepad1.left_stick_x;
-            double rb = -1*Math.cos(rb_angle)*P.gamepad1.left_stick_x;
+            double lf = -1*Math.cos(Math.toRadians(lf_angle))*P.gamepad1.left_stick_x;
+            double lb = -1*Math.cos(Math.toRadians(lb_angle))*P.gamepad1.left_stick_x;
+            double rf = -1*Math.cos(Math.toRadians(rf_angle))*P.gamepad1.left_stick_x;
+            double rb = -1*Math.cos(Math.toRadians(rb_angle))*P.gamepad1.left_stick_x;
             setMtPower(lf,rf,lb,rb);
         }
     }

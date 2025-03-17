@@ -30,13 +30,13 @@ public class CameraOut extends Module { // Камера, которая испо
         this.state = state;
         switch ( state ) {
             case -1:
-                cameraServo.setPosition(0);
+                cameraServo.setPosition(1);
                 break;
             case 0:
                 cameraServo.setPosition(.5);
                 break;
             case 1:
-                cameraServo.setPosition(1);
+                cameraServo.setPosition(0);
                 break;
         }
     }

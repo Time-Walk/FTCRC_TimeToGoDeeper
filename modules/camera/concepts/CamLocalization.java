@@ -17,7 +17,7 @@ public class CamLocalization { // Локализация по камере
     public double absY = 0;
 
     public static double beta = 0;
-    public static double height = 24;
+    public static double height = 31.5;
 
     public static double r_x_cam_0 = 30;
     public static double r_y_cam_0 = 30;
@@ -27,12 +27,12 @@ public class CamLocalization { // Локализация по камере
     public static double r_y_cam__1 = 30;
     public static double P = 30;
 
-    public static double hid11 = 10;
-    public static double hid12 = 10;
-    public static double hid13 = 10;
-    public static double hid14 = 10;
-    public static double hid15 = 10;
-    public static double hid16 = 10;
+    public static double hid11 = 9.1;
+    public static double hid12 = 9.1;
+    public static double hid13 = 9.1;
+    public static double hid14 = 9.1;
+    public static double hid15 = 9.1;
+    public static double hid16 = 9.1;
     double[] hids;
 
     double fx;
@@ -157,11 +157,11 @@ public class CamLocalization { // Локализация по камере
             switch ( pipe.detection.id ){ // Изменение угла поворота камеры взависимости от обнаруженного AprilTag
                 case 13:
                 case 14: // Если мы видим 13 или 14 AprilTag
-                    alpha -= 90;
+                    alpha += 90;
                     break;
                 case 11:
                 case 16: // Если мы видим 11 или 16 AprilTag
-                    alpha += 90;
+                    alpha -= 90;
                     break;
                 case 12:
                     if ( robotAngle > 0 ) { // 12 AprilTag расположен сзади от робота, поэтому нужно проверить ошибку 180 градусов
@@ -177,11 +177,11 @@ public class CamLocalization { // Локализация по камере
             switch ( pipe.detection.id ) { // Изменение угла поворота камеры взависимости от обнаруженного AprilTag
                 case 11:
                 case 16: // Если мы видим 11 или 16 AprilTag
-                    alpha -= 90;
+                    alpha += 90;
                     break;
                 case 13:
                 case 14: // Если мы видим 13 или 14 AprilTag
-                    alpha += 90;
+                    alpha -= 90;
                     break;
                 case 15:
                     if ( robotAngle > 0 ) { // 15 AprilTag расположен сзади от робота, поэтому нужно проверить ошибку 180 градусов
@@ -193,23 +193,29 @@ public class CamLocalization { // Локализация по камере
                     break;
             }
         }
-        double rx = r_x_cam_0;
-        double ry = r_y_cam_0;
+        double rx = r_x_cam_1;
+        double ry = r_y_cam_1;
         switch ( cam.getRotationState() ) { // Делаем поправку угла поворота камеры если повернут сервомотор, на котором установлена камера, и сохраняем расстояние от камеры до центра робота
             case -1:
-                alpha -= 90;
+                //alpha -= 90;
+                if ( alpha > 0 ) { alpha -= 180; }
+                else { alpha += 180; }
                 rx = r_x_cam__1;
                 ry = r_y_cam__1;
                 break;
-            case 1:
+            case 0:
                 alpha += 90;
-                rx = r_x_cam_1;
-                ry = r_y_cam_1;
-                break;
+                rx = r_x_cam_0;
+                ry = r_y_cam_0;
         }
+        cam.P.telemetry.addData("rot", robotAngle);
+        cam.P.telemetry.addData("alpha", alpha);
         Point pleft = pipe.detection.corners[0]; // Нижняя левая точка AprilTag
         Point pright = pipe.detection.corners[1]; // Нижняя правая точка AprilTag
         double[] cam_xy = pic2rTrapezoid(Math.toRadians(alpha), Math.toRadians(beta), (pleft.x+pright.x)/2, (pleft.y+pright.y)/2, height, pipe.detection.id);
+        cam.P.telemetry.addData("x", cam_xy[0]);
+        cam.P.telemetry.addData("y", cam_xy[1]);
+        cam.P.telemetry.update();
         double[] relative_xy = camToCenterOfRobot(Math.toRadians(alpha), cam_xy[0], cam_xy[1], rx, ry);
         double[] abs_xy = relativeToAbsolute(pipe.detection.id, relative_xy[0], relative_xy[1]);
         absX = abs_xy[0];

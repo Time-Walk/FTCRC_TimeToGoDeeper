@@ -30,17 +30,15 @@ public class Grab extends Module {
         } else if (P.gamepad2.left_trigger > 0.5) {
             zov_l.setPower(-0.25);
             zov_r.setPower(0.25);
-        } else {
-            zov_l.setPower(0);
-            zov_r.setPower(0);
-        }
-        if (P.gamepad2.left_bumper) {
+        } else if (P.gamepad2.left_bumper) {
             zov_l.setPower(-1);
             zov_r.setPower(-1);
         } else if (P.gamepad2.right_bumper) {
             zov_l.setPower(1);
             zov_r.setPower(1);
+        } else {
+            zov_l.setPower(0);
+            zov_r.setPower(0);
         }
-
     }
 }
