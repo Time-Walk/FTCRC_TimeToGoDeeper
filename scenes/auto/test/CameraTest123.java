@@ -14,15 +14,16 @@ import org.opencv.core.Point;
 @Config
 @Autonomous(name = "ахаха никита")
 public class CameraTest123 extends AutonomousPack {
-    public static int ss = 0;
+    public static int ss = 1;
     @Override
     public void doSetup() {
         Telemetry dashTele = FtcDashboard.getInstance().getTelemetry();
         CamLocalization loc = new CamLocalization(R.cam, true, Alliance.BLUE);
+        R.imuv2.reset();
 
         while (!isStopRequested()) {
             R.cam.setRotationState(ss);
-            dashTele.addData("писюн", "пенис");
+            dashTele.addData("test", "test");
             /*if ( loc.pipe.isAprilTagDetected ) {
                 Point pleft = loc.pipe.detection.corners[0];
                 Point pright = loc.pipe.detection.corners[1];

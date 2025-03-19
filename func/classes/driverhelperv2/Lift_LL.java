@@ -4,5 +4,5 @@ import com.acmerobotics.dashboard.config.Config;
 
 @Config
 public class Lift_LL {
-    public static int upper_ticks = 555;
+    public static int upper_ticks = 1500;
 }

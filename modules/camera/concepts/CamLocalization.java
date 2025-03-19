@@ -16,16 +16,16 @@ public class CamLocalization { // Локализация по камере
     public double absX = 0;
     public double absY = 0;
 
-    public static double beta = 0;
-    public static double height = 31.5;
+    public static double beta = -2.3;
+    public static double height = 27.5;
 
-    public static double r_x_cam_0 = 30;
-    public static double r_y_cam_0 = 30;
-    public static double r_x_cam_1 = 30;
-    public static double r_y_cam_1 = 30;
-    public static double r_x_cam__1 = 30;
-    public static double r_y_cam__1 = 30;
-    public static double P = 30;
+    public static double r_x_cam_0 = 5.5;
+    public static double r_y_cam_0 = 22.5;
+    public static double r_x_cam_1 = -14.5;
+    public static double r_y_cam_1 = 9.5;
+    public static double r_x_cam__1 = 15.5;
+    public static double r_y_cam__1 = 1;
+    public static double P = 60;
 
     public static double hid11 = 9.1;
     public static double hid12 = 9.1;
@@ -208,6 +208,12 @@ public class CamLocalization { // Локализация по камере
                 rx = r_x_cam_0;
                 ry = r_y_cam_0;
         }
+        if ( alpha > 180 ) {
+            alpha = - ( 180 - ( alpha - 180 ));
+        }
+        else if ( alpha <= -180) {
+            alpha = 180 - ( alpha + 180 );
+        }
         cam.P.telemetry.addData("rot", robotAngle);
         cam.P.telemetry.addData("alpha", alpha);
         Point pleft = pipe.detection.corners[0]; // Нижняя левая точка AprilTag
@@ -215,9 +221,13 @@ public class CamLocalization { // Локализация по камере
         double[] cam_xy = pic2rTrapezoid(Math.toRadians(alpha), Math.toRadians(beta), (pleft.x+pright.x)/2, (pleft.y+pright.y)/2, height, pipe.detection.id);
         cam.P.telemetry.addData("x", cam_xy[0]);
         cam.P.telemetry.addData("y", cam_xy[1]);
-        cam.P.telemetry.update();
         double[] relative_xy = camToCenterOfRobot(Math.toRadians(alpha), cam_xy[0], cam_xy[1], rx, ry);
+        cam.P.telemetry.addData("rel x", relative_xy[0]);
+        cam.P.telemetry.addData("rel y", relative_xy[1]);
         double[] abs_xy = relativeToAbsolute(pipe.detection.id, relative_xy[0], relative_xy[1]);
+        cam.P.telemetry.addData("abs x", abs_xy[0]);
+        cam.P.telemetry.addData("abs y", abs_xy[1]);
+        cam.P.telemetry.update();
         absX = abs_xy[0];
         absY = abs_xy[1];
     }

@@ -8,16 +8,18 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 @Config
 public class DoubleLiftPID { // Синхронный PID-регулятор для двух степеней лифт
     public RobotPortal R;
-    public static double lc_kp = .3;
-    public static double lc_ki = .03;
-    public static double lc_kd = .5;
-    public static int lc_possibleDifference = 10;
+    public static double lc_kp = .0007;
+    public static double lc_ki = 0.000005;
+    public static double lc_kd = .01;
+    public static int lc_possibleDifference = 7;
     public PID pid_lc;
     public PID pid_ll;
-    public static double ll_kp = .3;
-    public static double ll_ki = .03;
-    public static double ll_kd = .5;
-    public static int ll_possibleDifference = 10;
+    public static double ll_kp = .00088;
+    public static double ll_ki = 0.000005;
+    public static double ll_kd = .0067;
+    public static int ll_possibleDifference = 7;
+    public static int lc_software_limit = 710;
+    public static int ll_software_limit = 1500;
     int lc_target = 0;
     int ll_target = 0;
     public DoubleLiftPID(RobotPortal R) {
@@ -26,10 +28,22 @@ public class DoubleLiftPID { // Синхронный PID-регулятор дл
         pid_ll = new PID(ll_kp, ll_ki, ll_kd);
     }
     public void setLcPosition(int ticks) {
+        if ( ticks < 0 ) { ticks = 0; }
+        else if ( ticks > lc_software_limit ) { ticks = lc_software_limit; }
         lc_target = ticks;
+        pid_lc.Ir = 0;
     }
     public void setLlPosition(int ticks) {
+        if ( ticks < 0 ) { ticks = 0; }
+        else if ( ticks > ll_software_limit ) { ticks = ll_software_limit; }
         ll_target = ticks;
+        pid_ll.Ir = 0;
+    }
+    public int getTargetLc() {
+        return lc_target;
+    }
+    public int getTargetLl() {
+        return ll_target;
     }
     public double[] tick() {
         double Er_lc = lc_target - R.lift.L.getCurrentPosition();

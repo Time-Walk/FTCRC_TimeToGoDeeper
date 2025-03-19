@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.Module;
 public class IMUv2 extends Module {
     BHI260IMU imu;
 
+    @Override
     public void initModule() {
         imu = P.hwmp.get(BHI260IMU.class, "imu");
         imu.initialize(new IMU.Parameters(

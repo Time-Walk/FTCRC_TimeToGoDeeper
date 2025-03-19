@@ -10,7 +10,7 @@ public class Grab extends Module {
     public Servo gzv;
     public CRServo zov_l, zov_r;
     public static double position_open = 0.4;
-    public static double position_close = 0.7;
+    public static double position_close = 0;
     @Override
     public void initModule() {
         gzv = P.hwmp.get(Servo.class, "gzv");
