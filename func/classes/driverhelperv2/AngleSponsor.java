@@ -19,12 +19,22 @@ public class AngleSponsor {
     }
     public void tick() {
         if ( R.P.gamepad1.start ) { upAngle = imu.getAngle(); }
-        double angle = imu.getAngle() + upAngle;
-        if ( angle > 180 ) {
+        double angle = imu.getAngle();
+        /*if ( angle > 180 ) {
             angle = - ( 180 - ( angle - 180 ));
         }
         else if ( angle <= -180) {
             angle = 180 - ( angle + 180 );
+        }*/
+        if ( upAngle < 0 ) {
+            double perehod = ( 180 + upAngle );
+            if ( angle > perehod ) { angle = -180 + ( angle - perehod ); }
+            else { angle -= upAngle; }
+        }
+        else {
+            double perehod = ( -180 + upAngle );
+            if ( angle < perehod ) { angle = 180 + (angle - perehod); }
+            else { angle -= upAngle; }
         }
         RobotAngle = angle;
     }

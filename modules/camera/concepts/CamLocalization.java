@@ -16,7 +16,7 @@ public class CamLocalization { // Локализация по камере
     public double absX = 0;
     public double absY = 0;
 
-    public static double beta = -2.3;
+    public static double beta = .5;
     public static double height = 27.5;
 
     public static double r_x_cam_0 = 5.5;
@@ -106,6 +106,28 @@ public class CamLocalization { // Локализация по камере
         return new double[] {x_x0+x_y0, y_x0+y_y0};
     }
 
+    public double[] planB(double alpha, double x0, double x1, double y0, double y1) {
+        double pic2pic = Math.sqrt(((x1-x0)*(x1-x0)) + ((y1-y0)*(y1-y0)));
+        double toCmKoef = 10.16 / pic2pic;
+        double midle = (x1+x0)/2;
+        double distmid = midle - cx;
+        double x_s_shapochkoy = distmid * toCmKoef;
+        double that_angle = Math.atan((distmid) / fx);
+        double y_s_shapochkoy = x_s_shapochkoy / Math.tan(that_angle);
+
+        double x_x0 = y_s_shapochkoy * Math.sin(alpha);
+        double y_x0 = y_s_shapochkoy * Math.cos(alpha);
+
+        double x_y0 = x_s_shapochkoy * Math.sin(alpha+(Math.PI/2));
+        double y_y0 = x_s_shapochkoy * Math.cos(alpha+(Math.PI/2));
+
+        return new double[] {x_x0+x_y0, y_x0+y_y0};
+    }
+
+    public double[] planC() {
+        return new double[] {pipe.detection.pose.x, pipe.detection.pose.y};
+    }
+
     double[] camToCenterOfRobot(double alpha, double x_cam, double y_cam, double rx, double ry) {
         /*
         Перевод из относительных координат от AprilTag до оптического центра камеры, в относительные
@@ -135,17 +157,17 @@ public class CamLocalization { // Локализация по камере
          */
         switch ( aprilTagId ) { // Перевод. P = длина плитки поля в см
             case 11:
-                return new double[] {P - x_, y_};
+                return new double[] {P + x_, y_};
             case 12:
-                return new double[] {y_, x_ + (3*P)};
+                return new double[] {y_, -x_ + (3*P)};
             case 13:
-                return new double[] {x_ + P, (6*P) - y_};
+                return new double[] {-x_ + P, (6*P) - y_};
             case 14:
-                return new double[] {x_ + (5*P), (6*P) - y_};
+                return new double[] {-x_ + (5*P), (6*P) - y_};
             case 15:
-                return new double[] {(6*P) - y_, (3*P) - x_};
+                return new double[] {(6*P) - y_, (3*P) + x_};
             case 16:
-                return new double[] {(5*P) - x_, y_};
+                return new double[] {(5*P) + x_, y_};
         }
         return new double[] {0, 0};
     }
@@ -204,7 +226,7 @@ public class CamLocalization { // Локализация по камере
                 ry = r_y_cam__1;
                 break;
             case 0:
-                alpha += 90;
+                alpha -= 90;
                 rx = r_x_cam_0;
                 ry = r_y_cam_0;
         }
@@ -218,7 +240,8 @@ public class CamLocalization { // Локализация по камере
         cam.P.telemetry.addData("alpha", alpha);
         Point pleft = pipe.detection.corners[0]; // Нижняя левая точка AprilTag
         Point pright = pipe.detection.corners[1]; // Нижняя правая точка AprilTag
-        double[] cam_xy = pic2rTrapezoid(Math.toRadians(alpha), Math.toRadians(beta), (pleft.x+pright.x)/2, (pleft.y+pright.y)/2, height, pipe.detection.id);
+        //double[] cam_xy = pic2rTrapezoid(Math.toRadians(alpha), Math.toRadians(beta), (pleft.x+pright.x)/2, (pleft.y+pright.y)/2, height, pipe.detection.id);
+        double[] cam_xy = planB(Math.toRadians(alpha), pleft.x, pright.x, pleft.y, pright.y);
         cam.P.telemetry.addData("x", cam_xy[0]);
         cam.P.telemetry.addData("y", cam_xy[1]);
         double[] relative_xy = camToCenterOfRobot(Math.toRadians(alpha), cam_xy[0], cam_xy[1], rx, ry);

@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.modules.Grab;
 
 @Config
 public class DifferencialController extends Grab {
-    public static double millisPerDegree = 3.75;
+    public static double millisPerDegree = 4;
     public static long timeToMoving = 350;
     public int ox_target = 180;
     public int oy_target = 90;
@@ -27,6 +27,7 @@ public class DifferencialController extends Grab {
 
     double timered_zov_l = 0;
     double timered_zov_r = 0;
+    public DebugedLol dbg;
 
     public void setTimer() {
         zl_time = (int)Math.round((-(curPos_ox-ox_target)-(curPos_oy-oy_target))*millisPerDegree);
@@ -37,27 +38,30 @@ public class DifferencialController extends Grab {
         curPos_oy = oy_target;
     }
 
+    public void initAgain(DebugedLol dbg) {
+        this.dbg = dbg;
+    }
+
     @Override
     public void tele() {
         timerTick();
-        if ( P.gamepad2.left_stick_button && P.gamepad2.right_stick_button && P.gamepad2.x) {
+        if ( dbg.isDebugMode && P.gamepad2.x) {
             open();
-
-        } else if (P.gamepad2.left_stick_button && P.gamepad2.right_stick_button && P.gamepad2.a) {
+        } else if (dbg.isDebugMode && P.gamepad2.a) {
             close();
         }
-        if (P.gamepad2.right_trigger > 0.5) {
-            controlled_zov_l = 0.25;
-            controlled_zov_r = -0.25;
-        } else if (P.gamepad2.left_trigger > 0.5) {
-            controlled_zov_l = -0.25;
-            controlled_zov_r = 0.25;
+        if (P.gamepad2.right_trigger > 0.05) {
+            controlled_zov_l = P.gamepad2.right_trigger;
+            controlled_zov_r = -P.gamepad2.right_trigger;
+        } else if (P.gamepad2.left_trigger > 0.05) {
+            controlled_zov_l = -P.gamepad2.left_trigger;
+            controlled_zov_r = P.gamepad2.left_trigger;
         } else if (P.gamepad2.left_bumper) {
-            controlled_zov_l = -1;
-            controlled_zov_r = -1;
+            controlled_zov_l = -.5;
+            controlled_zov_r = -.5;
         } else if (P.gamepad2.right_bumper) {
-            controlled_zov_l = 1;
-            controlled_zov_r = 1;
+            controlled_zov_l = .5;
+            controlled_zov_r = .5;
         } else {
             controlled_zov_l = 0;
             controlled_zov_r = 0;

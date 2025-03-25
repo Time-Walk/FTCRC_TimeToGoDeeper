@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.scenes.tele.field;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.func.classes.driverhelperv2.DriverHelperWithStates;
 import org.firstinspires.ftc.teamcode.scenes.superclasses.TeleOpPack;
@@ -68,6 +69,14 @@ public class teleopv42 extends TeleOpPack {
     public void doSetup() {
         R.imuv2.reset();
         dhv42 = new DriverHelperWithStates(R);
+        R.lift.L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        R.lift.L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        R.lift.L_L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        R.lift.L_L.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+    @Override
+    public void doSetupMovings() {
+        dhv42.GrabDH.open();
     }
     @Override
     public void doActions() {
@@ -80,6 +89,8 @@ public class teleopv42 extends TeleOpPack {
         telemetry.addData("now y", dhv42.GrabDH.curPos_oy);
         telemetry.addData("lc pos", R.lift.L.getCurrentPosition());
         telemetry.addData("ll pos", R.lift.L_L.getCurrentPosition());
+        telemetry.addData("target lc", dhv42.LiftDH.DLPID.getTargetLc());
+        telemetry.addData("target ll", dhv42.LiftDH.DLPID.getTargetLl());
         telemetry.update();
     }
 }

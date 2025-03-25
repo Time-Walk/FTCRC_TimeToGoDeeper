@@ -21,8 +21,8 @@ public class rotater extends TeleOpPack {
     }
     @Override
     public void doActions() {
-        R.wb.setAxisPower(0, 0, stblz.tick());
         as.tick();
+        R.wb.setAxisPower(0, 0, stblz.tick());
         telemetry.addData("as", as.RobotAngle);
         telemetry.addData("angle", R.imuv2.getAngle());
         telemetry.update();

@@ -36,7 +36,7 @@ public class CameraOut extends Module { // Камера, которая испо
                 cameraServo.setPosition(.5);
                 break;
             case 1:
-                cameraServo.setPosition(0);
+                cameraServo.setPosition(0.05);
                 break;
         }
     }

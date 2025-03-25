@@ -8,17 +8,17 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 @Config
 public class DoubleLiftPID { // Синхронный PID-регулятор для двух степеней лифт
     public RobotPortal R;
-    public static double lc_kp = .0007;
-    public static double lc_ki = 0.000005;
-    public static double lc_kd = .01;
+    public static double lc_kp = .001;
+    public static double lc_ki = 0.00000;
+    public static double lc_kd = .001;
     public static int lc_possibleDifference = 7;
     public PID pid_lc;
     public PID pid_ll;
-    public static double ll_kp = .00088;
-    public static double ll_ki = 0.000005;
-    public static double ll_kd = .0067;
+    public static double ll_kp = .0009;
+    public static double ll_ki = 0.00000;
+    public static double ll_kd = .005;
     public static int ll_possibleDifference = 7;
-    public static int lc_software_limit = 710;
+    public static int lc_software_limit = 750;
     public static int ll_software_limit = 1500;
     int lc_target = 0;
     int ll_target = 0;

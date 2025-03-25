@@ -25,7 +25,7 @@ public class RGBps extends Module {
                 switch ( stateCol ) {
                     case 0:
                         G += .01;
-                        P.gamepad2.setLedColor(R, G, B, speed+25);
+                        P.gamepad1.setLedColor(R, G, B, speed+125);
                         delay(speed);
                         if (G > .99) {
                             stateCol++;
@@ -33,7 +33,7 @@ public class RGBps extends Module {
                         break;
                     case 1:
                         R -= .01;
-                        P.gamepad2.setLedColor(R, G, B, speed+25);
+                        P.gamepad1.setLedColor(R, G, B, speed+125);
                         delay(speed);
                         if (R < .01) {
                             stateCol++;
@@ -41,7 +41,7 @@ public class RGBps extends Module {
                         break;
                     case 2:
                         B += .01;
-                        P.gamepad2.setLedColor(R, G, B, speed+25);
+                        P.gamepad1.setLedColor(R, G, B, speed+125);
                         delay(speed);
                         if (B > .99) {
                             stateCol++;
@@ -49,7 +49,7 @@ public class RGBps extends Module {
                         break;
                     case 3:
                         G -= .01;
-                        P.gamepad2.setLedColor(R, G, B, speed+25);
+                        P.gamepad1.setLedColor(R, G, B, speed+125);
                         delay(speed);
                         if (G < .01) {
                             stateCol++;
@@ -57,7 +57,7 @@ public class RGBps extends Module {
                         break;
                     case 4:
                         R += .01;
-                        P.gamepad2.setLedColor(R, G, B, speed+25);
+                        P.gamepad1.setLedColor(R, G, B, speed+125);
                         delay(speed);
                         if (R > .99) {
                             stateCol++;
@@ -65,7 +65,7 @@ public class RGBps extends Module {
                         break;
                     case 5:
                         B -= .01;
-                        P.gamepad2.setLedColor(R, G, B, speed+25);
+                        P.gamepad1.setLedColor(R, G, B, speed+125);
                         delay(speed);
                         if (B < .01) {
                             stateCol = 0;

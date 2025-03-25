@@ -8,14 +8,14 @@ import org.firstinspires.ftc.teamcode.modules.superclasses.RobotPortal;
 
 @Config
 public class AbsoluteRider {
-    public static double xkp = .05;
-    public static double xkd = .1;
-    public static double ykp = .05;
-    public static double ykd = .1;
-    public static double rkp = .3;
-    public static double rkd = .5;
-    public static double x_maxdiff = 5;
-    public static double y_maxdiff = 5;
+    public static double xkp = .04;
+    public static double xkd = .2;
+    public static double ykp = .04;
+    public static double ykd = .2;
+    public static double rkp = .05;
+    public static double rkd = .1;
+    public static double x_maxdiff = 2;
+    public static double y_maxdiff = 2;
     public static double r_maxdiff = 3;
     public PD xPd;
     public PD yPd;
@@ -58,19 +58,35 @@ public class AbsoluteRider {
     }
 
     public double[] tick(double absX, double absY) {
-        double Rx = constrain(xPd.tick(targetX-absX), .5);
-        double Ry = constrain(yPd.tick(targetY-absY), .5);
-        double Rr = constrain(rPd.tick(targetR-R.imuv2.getAngle()), .5);
-        return new double[] {Rx, Ry, Rr};
+        double Rx = xPd.tick(targetX-absX);
+        double Ry = yPd.tick(targetY-absY);
+        double Rr = rPd.tick(targetR-R.imuv2.getAngle());
+        Rx = Rx * Math.cos(Math.toRadians(R.imuv2.getAngle())) + Ry * Math.cos(Math.toRadians(90+R.imuv2.getAngle()));
+        Ry = Ry * Math.cos(Math.toRadians(R.imuv2.getAngle())) - Rx * Math.cos(Math.toRadians(90+R.imuv2.getAngle()));
+        double Rx_ = Ry;
+        Ry = Rx;
+        Rx = -Rx_;
+        Rx = constrain(Rx, .3);
+        Ry = constrain(Ry, .3);
+        Rr = constrain(Rr, .3);
+        double lf = constrain(Ry + Rx + Rr, .5);
+        double lb = constrain(Ry - Rx + Rr, .5);
+        double rf = constrain(-Ry + Rx + Rr, .5);
+        double rb = constrain(-Ry - Rx + Rr, .5);
+        return new double[] {lf, lb, rf, rb};
     }
 
     public void getToPos(Gettable gettable) {
         if ( !resetR ) { targetR = R.imuv2.getAngle(); }
         double[] abses = gettable.getNewVals();
-        while ( ( targetX - abses[0] > x_maxdiff || targetY - abses[1] > y_maxdiff || targetR - R.imuv2.getAngle() > r_maxdiff ) && R.P.L.opModeIsActive() ) {
+        while ( ( Math.abs(targetX - abses[0]) > x_maxdiff || Math.abs(targetY - abses[1]) > y_maxdiff || Math.abs(targetR - R.imuv2.getAngle()) > r_maxdiff ) && R.P.L.opModeIsActive() ) {
             abses = gettable.getNewVals();
             double[] pw = tick(abses[0], abses[1]);
-            R.wb.setAxisPower(pw[0], pw[1], pw[2]);
+            R.P.telemetry.addData("abs x", abses[0]);
+            R.P.telemetry.addData("abs y", abses[1]);
+            R.P.telemetry.addData("t x", targetX);
+            R.P.telemetry.addData("t y", targetY);
+            R.wb.setMtPower(pw[0], pw[1], pw[2], pw[3]);
         }
         R.wb.setMtZero();
     }

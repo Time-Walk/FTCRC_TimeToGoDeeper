@@ -13,4 +13,6 @@ public class DHStates {
     public static final int TAKING_SPECIMEN = 5;
     public static final int TRIED_SPECIMEN = 6;
     public static final int SPECIMEN = 7;
+    public static final int TAKING_SPECIMAN_TAKED = 51;
+    public static final int BASKET_THROWING = 41;
 }
